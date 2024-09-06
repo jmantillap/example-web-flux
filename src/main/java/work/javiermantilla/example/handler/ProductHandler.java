@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import work.javiermantilla.example.dto.ProductDto;
 import work.javiermantilla.example.entity.Product;
 import work.javiermantilla.example.service.ProductService;
+import work.javiermantilla.example.validation.ObjectValidator;
 
 @Component
 @Slf4j
@@ -18,6 +20,7 @@ import work.javiermantilla.example.service.ProductService;
 public class ProductHandler {
 	
 	private final ProductService productService;
+	private final ObjectValidator objectValidator;
 	
 	public Mono<ServerResponse> getAll(ServerRequest request) {
         Flux<Product> products = productService.getAll();
@@ -26,8 +29,7 @@ public class ProductHandler {
         		.body(products, Product.class);
     }
 
-    public Mono<ServerResponse> getOne(ServerRequest request) {
-        //int id = Integer.valueOf(request.pathVariable("id"));
+    public Mono<ServerResponse> getOne(ServerRequest request) {        
         int id = Integer.parseInt(request.pathVariable("id"));
         Mono<Product> product = productService.getById(id);
         return ServerResponse.ok()
@@ -36,25 +38,25 @@ public class ProductHandler {
     }
 
     public Mono<ServerResponse> save(ServerRequest request) {
-        Mono<Product> product = request.bodyToMono(Product.class);
-        return product.flatMap(p -> ServerResponse.status(201)
+        Mono<ProductDto> productDTO = request.bodyToMono(ProductDto.class).doOnNext(objectValidator::validate);
+        return productDTO.flatMap(p -> ServerResponse.status(201)
         					.contentType(MediaType.APPLICATION_JSON)
         					.body(productService.save(p), Product.class)
         					);
     }
 
     public Mono<ServerResponse> update(ServerRequest request) {    	
-        //int id = Integer.valueOf(request.pathVariable("id"));
+        
         int id = Integer.parseInt(request.pathVariable("id"));
         log.info("Se actializa el producto: {}",id);
-        Mono<Product> product = request.bodyToMono(Product.class);
-        return product.flatMap(p -> ServerResponse.ok()
+        Mono<ProductDto> productDto = request.bodyToMono(ProductDto.class).doOnNext(objectValidator::validate);
+        return productDto.flatMap(p -> ServerResponse.ok()
         		.contentType(MediaType.APPLICATION_JSON)
         		.body(productService.update(id, p), Product.class));
     }
 
     public Mono<ServerResponse> delete(ServerRequest request) {
-        int id = Integer.valueOf(request.pathVariable("id"));
+    	int id = Integer.parseInt(request.pathVariable("id"));
         return ServerResponse.ok()
         		.contentType(MediaType.APPLICATION_JSON)
         		.body(productService.delete(id), Product.class);

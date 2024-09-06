@@ -14,8 +14,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import work.javiermantilla.example.dto.ProductDto;
 import work.javiermantilla.example.entity.Product;
 import work.javiermantilla.example.service.ProductService;
+import work.javiermantilla.example.validation.ObjectValidator;
 
 @RestController
 @RequestMapping("/product")
@@ -24,6 +26,7 @@ import work.javiermantilla.example.service.ProductService;
 public class ProductController {
 	
 	private final ProductService productService;
+	private final ObjectValidator objectValidator;
 	
 	@GetMapping
 	public Flux<Product> getAll(){
@@ -36,13 +39,15 @@ public class ProductController {
 	}
 	
 	@PostMapping
-	public Mono<Product> save(@RequestBody Product product){
+	public Mono<Product> save(@RequestBody ProductDto product){
+		objectValidator.validate(product);
 		return productService.save(product);
 	}
 	
 	@PutMapping("/{id}")
-	public Mono<Product> update(@PathVariable int id, @RequestBody Product product){
+	public Mono<Product> update(@PathVariable int id, @RequestBody ProductDto product){
 		log.info("Se actualiza id: {}",id);
+		objectValidator.validate(product);
 		return productService.update(id,product);
 	}
 	
