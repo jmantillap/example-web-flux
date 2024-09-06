@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "9e81199e-9d79-4121-8849-166f017c6b1e",
+		"name": "example-web-flux",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22646572"
+	},
+	"item": [
+		{
+			"name": "controller",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/product/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"price\": 0.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"name\": \"producto de prueba1\",\r\n    \"price\": 11.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/product/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/product/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "function reactive router",
+			"item": [
+				{
+					"name": "list function",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/product-function",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product-function"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByID funtion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/product-function/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product-function",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create function",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"price\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/product-function",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product-function"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update function",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"name\": \"prueba2\",\r\n    \"price\": 11.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/product-function/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product-function",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete function",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/product-function/116",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"product-function",
+								"116"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
