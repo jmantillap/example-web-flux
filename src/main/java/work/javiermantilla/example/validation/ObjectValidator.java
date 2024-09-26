@@ -3,8 +3,8 @@ package work.javiermantilla.example.validation;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
