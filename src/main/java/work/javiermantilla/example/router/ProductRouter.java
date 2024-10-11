@@ -16,7 +16,7 @@ public class ProductRouter {
 
 	private static final String PATH = "product-function";
 	
-	private static final String PATH_VARIABLE = "/{id}";
+	private static final String PATH_VARIABLE = PATH + "/{id}";
 	
 	@Bean
     WebProperties.Resources resources() {
@@ -28,10 +28,10 @@ public class ProductRouter {
 		 	log.info("Se cargo el router para el manejaror de productos");
 	        return RouterFunctions.route()
 	                .GET(PATH, handler::getAll)
-	                .GET(PATH + PATH_VARIABLE, handler::getOne)
+	                .GET(PATH_VARIABLE, handler::getOne)
 	                .POST(PATH, handler::save)
-	                .PUT(PATH + PATH_VARIABLE, handler::update)
-	                .DELETE(PATH + PATH_VARIABLE, handler::delete)
+	                .PUT(PATH_VARIABLE, handler::update)
+	                .DELETE(PATH_VARIABLE, handler::delete)
 	                .build();
 	 }
 	

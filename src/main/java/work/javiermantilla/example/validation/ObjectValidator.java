@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import work.javiermantilla.example.exception.CustomException;
 
 @Component
-//@Slf4j
+@Slf4j
 @RequiredArgsConstructor
 public class ObjectValidator {
 

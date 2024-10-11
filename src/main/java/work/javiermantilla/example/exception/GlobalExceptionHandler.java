@@ -3,7 +3,6 @@ package work.javiermantilla.example.exception;
 import java.util.Map;
 import java.util.Optional;
 
-//import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -15,10 +14,12 @@ import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.*;
+
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
-//@Slf4j
+@Slf4j
 public class GlobalExceptionHandler extends AbstractErrorWebExceptionHandler {
 
 	public GlobalExceptionHandler(ErrorAttributes errorAttributes, WebProperties.Resources resources,
