@@ -38,7 +38,8 @@ public class ProductHandler {
     }
 
     public Mono<ServerResponse> save(ServerRequest request) {
-        Mono<ProductDto> productDTO = request.bodyToMono(ProductDto.class).doOnNext(objectValidator::validate);
+        Mono<ProductDto> productDTO = request.bodyToMono(ProductDto.class)
+        		.doOnNext(objectValidator::validate);
         return productDTO.flatMap(p -> ServerResponse.status(201)
         					.contentType(MediaType.APPLICATION_JSON)
         					.body(productService.save(p), Product.class)
@@ -49,7 +50,8 @@ public class ProductHandler {
         
         int id = Integer.parseInt(request.pathVariable("id"));
         log.info("Se actializa el producto: {}",id);
-        Mono<ProductDto> productDto = request.bodyToMono(ProductDto.class).doOnNext(objectValidator::validate);
+        Mono<ProductDto> productDto = request.bodyToMono(ProductDto.class)
+        							.doOnNext(objectValidator::validate);
         return productDto.flatMap(p -> ServerResponse.ok()
         		.contentType(MediaType.APPLICATION_JSON)
         		.body(productService.update(id, p), Product.class));

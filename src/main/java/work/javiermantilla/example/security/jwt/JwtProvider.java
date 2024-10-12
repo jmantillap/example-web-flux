@@ -29,6 +29,7 @@ public class JwtProvider {
 
 	@SuppressWarnings("deprecation")
 	public String generateToken(UserDetails userDetails) {
+		
 		return Jwts.builder()
 				.setSubject(userDetails.getUsername())
 				.claim("roles", userDetails.getAuthorities())
