@@ -1,6 +1,6 @@
 package work.javiermantilla.example.router;
 
-import org.springframework.boot.autoconfigure.web.WebProperties;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -18,11 +18,7 @@ public class ProductRouter {
 	
 	private static final String PATH_VARIABLE = PATH + "/{id}";
 	
-	@Bean
-    WebProperties.Resources resources() {
-        return new WebProperties.Resources();
-    }
-	
+		
 	 @Bean
 	 RouterFunction<ServerResponse> router(ProductHandler handler) {
 		 	log.info("Se cargo el router para el manejaror de productos");
