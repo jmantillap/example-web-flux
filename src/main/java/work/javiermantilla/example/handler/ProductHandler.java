@@ -1,6 +1,7 @@
 package work.javiermantilla.example.handler;
 
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -37,6 +38,7 @@ public class ProductHandler {
         		.body(product, Product.class);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Mono<ServerResponse> save(ServerRequest request) {
         Mono<ProductDto> productDTO = request.bodyToMono(ProductDto.class)
         		.doOnNext(objectValidator::validate);
@@ -45,7 +47,8 @@ public class ProductHandler {
         					.body(productService.save(p), Product.class)
         					);
     }
-
+    
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Mono<ServerResponse> update(ServerRequest request) {    	
         
         int id = Integer.parseInt(request.pathVariable("id"));
@@ -56,7 +59,8 @@ public class ProductHandler {
         		.contentType(MediaType.APPLICATION_JSON)
         		.body(productService.update(id, p), Product.class));
     }
-
+    
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Mono<ServerResponse> delete(ServerRequest request) {
     	int id = Integer.parseInt(request.pathVariable("id"));
         return ServerResponse.ok()

@@ -24,7 +24,9 @@ public class AuthHandler {
     public Mono<ServerResponse> login(ServerRequest request) {
         Mono<LoginDto> dtoMono = request.bodyToMono(LoginDto.class);
         return dtoMono
-                .flatMap(dto -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(userService.login(dto), TokenDto.class));
+                .flatMap(dto -> ServerResponse.ok()
+                				.contentType(MediaType.APPLICATION_JSON)
+                				.body(userService.login(dto), TokenDto.class));
     }
 
     public Mono<ServerResponse> create(ServerRequest request) {
