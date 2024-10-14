@@ -13,6 +13,7 @@ import work.javiermantilla.example.security.dto.LoginDto;
 import work.javiermantilla.example.security.dto.TokenDto;
 import work.javiermantilla.example.security.entity.User;
 import work.javiermantilla.example.security.service.UserService;
+import work.javiermantilla.example.validation.ObjectValidator;
 
 @Component
 @Slf4j
@@ -20,9 +21,11 @@ import work.javiermantilla.example.security.service.UserService;
 public class AuthHandler {
 
     private final UserService userService;
+    private final ObjectValidator objectValidator;
 
     public Mono<ServerResponse> login(ServerRequest request) {
-        Mono<LoginDto> dtoMono = request.bodyToMono(LoginDto.class);
+        Mono<LoginDto> dtoMono = request.bodyToMono(LoginDto.class)
+        		.doOnNext(objectValidator::validate);
         return dtoMono
                 .flatMap(dto -> ServerResponse.ok()
                 				.contentType(MediaType.APPLICATION_JSON)
@@ -30,7 +33,8 @@ public class AuthHandler {
     }
 
     public Mono<ServerResponse> create(ServerRequest request) {
-        Mono<CreateUserDto> dtoMono = request.bodyToMono(CreateUserDto.class);
+        Mono<CreateUserDto> dtoMono = request.bodyToMono(CreateUserDto.class)
+        		.doOnNext(objectValidator::validate);;
         return dtoMono
                 .flatMap(dto -> ServerResponse.ok()
                 				.contentType(MediaType.APPLICATION_JSON)
